@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-// const assignmentSchema = require('./Assignment');
+const reactionsSchema = require('./Reaction');
 
 // Schema to create Student model
 const thoughtSchema = new Schema(
@@ -34,6 +34,6 @@ thoughtSchema.virtual('formattedCreatedAt').get(function () {
   return this.createdAt.toISOString(); 
 })
 
-const Thoughts = model('thoughts', thoughtSchemaSchema);
+const Thoughts = model('thoughts', thoughtSchema);
 
 module.exports = Thoughts;

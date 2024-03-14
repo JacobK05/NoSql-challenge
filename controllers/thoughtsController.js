@@ -76,6 +76,28 @@ async deleteThought(req, res){
     console.log(err)
     return res.status(500).json(err)
   }
+},
+
+async createReaction(req, res) {
+  try {
+      const thought = await Thought.findOne({_id: req.params.thoughtId})
+
+
+      res.json();
+  } catch (err) {
+      res.status(500).json(err);
+  }
+},
+
+// Method to delete a reaction from a specific thought
+async deleteReaction(req, res) {
+  try {
+      const thought = await Thought.findOne({_id: req.params.thoughtId});
+
+      res.status(200).json();
+  } catch (err) {
+      res.status(500).json(err);
+  }
 }
 
 }
