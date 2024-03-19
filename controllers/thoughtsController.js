@@ -80,10 +80,16 @@ async deleteThought(req, res){
 
 async createReaction(req, res) {
   try {
-      const thought = await Thought.findOne({_id: req.params.thoughtId})
+      const thought = await Thought.findOne(
+        {_id: req.params.thoughtId},
+        {$addToSet: { reactions: req.body}},
+        {runValidators: true, new: true }
+        )
 
-
-      res.json();
+      if(!thought){
+        return res.status(404).json({ message: 'No thought with this id'})
+      }
+      res.json(thought);
   } catch (err) {
       res.status(500).json(err);
   }
@@ -92,9 +98,15 @@ async createReaction(req, res) {
 // Method to delete a reaction from a specific thought
 async deleteReaction(req, res) {
   try {
-      const thought = await Thought.findOne({_id: req.params.thoughtId});
-
-      res.status(200).json();
+      const thought = await Thought.findOne(
+        {_id: req.params.thoughtId},
+        {$pull: {reaction: {reactionId: req.params.reactionId}}},
+        { runValidators: true, new: true}
+        );
+        if(!thought){
+          res.status(404).json({ message: 'No thought with this id '})
+        }
+      res.json(thought);
   } catch (err) {
       res.status(500).json(err);
   }
