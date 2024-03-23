@@ -49,7 +49,7 @@ async createThought(req, res){
 async updateThought (req, res) {
   try{ 
     const thought = await Thought.findOneAndUpdate(
-      {_id: req.body.thoughtId},
+      {_id: req.params.thoughtId},
       {$set: req.body},
       { runValidators: true, new: true }
     )
@@ -57,7 +57,7 @@ async updateThought (req, res) {
     return res.status(404).json({message: 'no thought with this id'})
   }
 
-res.json('thought deleted')
+res.json('thought updated')
   }catch (err) {
     console.log(err)
     return res.status(500).json(err)

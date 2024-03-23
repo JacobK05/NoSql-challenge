@@ -1,17 +1,17 @@
 const { Schema, model } = require('mongoose');
 const reactionsSchema = require('./Reaction');
 
-// Schema to create Student model
+
 const thoughtSchema = new Schema(
   {
-    thoughtText: {
+    thought: {
       type: String,
       required: true,
       minlenght: 1,
       maxlenght: 280,
     },
 
-    createAt: {
+    createdAt: {
       type: Date,
       default: Date.now,
 
